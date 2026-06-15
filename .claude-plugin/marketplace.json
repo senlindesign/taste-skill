@@ -1,0 +1,16 @@
+{
+  "name": "taste-skill",
+  "owner": { "name": "Sen Lin", "url": "https://github.com/senlindesign" },
+  "metadata": {
+    "description": "The /taste skill — reverse-engineer any website's design taste (tokens + trade-offs).",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "taste",
+      "source": "./",
+      "description": "Reverse-engineer any website's design taste — tokens + trade-offs.",
+      "version": "1.0.0"
+    }
+  ]
+}

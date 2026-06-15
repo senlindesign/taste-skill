@@ -9,7 +9,7 @@
 
 Reverse-engineer any website's design taste. Tokens + trade-offs — not just "what", but "why".
 
-> **Quick start:** Clone into `~/.claude/skills/taste`, install Playwright MCP, run `/taste <url>`. [Full install guide below.](#installation)
+> **Quick start:** `git clone … && cd taste-skill && ./install.sh` installs for Claude / Codex / Gemini at once. Then install Playwright MCP and run `/taste <url>`. [Full guide below.](#installation)
 
 ---
 
@@ -136,6 +136,20 @@ After analysis, the skill writes an additional file for your build tool:
 ---
 
 ## Installation
+
+### All tools at once
+
+One clone, symlinked into every CLI you have:
+
+```bash
+git clone https://github.com/senlindesign/taste-skill
+cd taste-skill
+./install.sh        # detects Claude Code / Codex CLI / Gemini CLI, links the skill into each
+```
+
+`install.sh` symlinks this single clone into each tool's skills directory (so `git pull` updates them all at once) and prints the one-time Playwright MCP setup for each. Flags: `--claude` / `--codex` / `--gemini` to target one, `--uninstall` to remove, `--dry-run` to preview.
+
+Prefer a per-tool or no-clone install? See below.
 
 ### Claude Code
 

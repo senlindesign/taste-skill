@@ -8,7 +8,7 @@
 
 Reverse-engineer any website's design taste. Tokens + trade-offs — not just "what", but "why".
 
-> **Quick start:** Clone into `~/.claude/skills/taste`, install Playwright MCP, run `/taste <url>`. [Full install guide below.](#installation)
+> **Quick start (Claude Code):** `/plugin marketplace add senlindesign/taste-skill` → `/plugin install taste@taste-skill`, then run `/taste <url>`. [Full install guide below.](#installation)
 
 ---
 
@@ -140,14 +140,24 @@ After analysis, the skill writes an additional file for your build tool:
 
 **Prerequisites:** [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (CLI / Desktop / VS Code)
 
+**Recommended — plugin marketplace** (no clone, auto-updates):
+
 ```bash
-# 1. Clone into your Claude skills directory
+# Run inside Claude Code:
+/plugin marketplace add senlindesign/taste-skill
+/plugin install taste@taste-skill
+```
+
+**Or — clone into your skills directory:**
+
+```bash
 git clone https://github.com/senlindesign/taste-skill ~/.claude/skills/taste
+```
 
-# 2. Install Playwright MCP (one-time)
+Then install Playwright MCP (one-time) and restart Claude Code:
+
+```bash
 claude mcp add playwright -s user -- npx -y @playwright/mcp@latest --isolated
-
-# 3. Restart Claude Code
 ```
 
 Run `/taste <url>` in any project.

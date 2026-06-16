@@ -1,0 +1,10 @@
+{
+  "name": "taste",
+  "version": "1.0.0",
+  "description": "Reverse-engineer any website's design taste — concrete tokens + opinionated trade-offs (WHY, not just WHAT). Produces {domain}.md + {domain}.json via a 4-step Playwright pipeline.",
+  "author": { "name": "Sen Lin" },
+  "homepage": "https://senlindesign.github.io/taste-skill/",
+  "repository": "https://github.com/senlindesign/taste-skill",
+  "license": "MIT",
+  "keywords": ["design", "design-tokens", "taste", "css", "playwright", "design-system"]
+}

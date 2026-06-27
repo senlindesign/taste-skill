@@ -109,7 +109,7 @@
   // Accent candidates: colors used in interactive surfaces (buttons, links)
   const accentCounts = new Map();
   document.querySelectorAll("button, a, [role='button']").forEach((el) => {
-    if (!isVisible(el)) return;
+    if (!isRendered(el)) return;
     const s = getComputedStyle(el);
     if (!skipBg(s.backgroundColor)) bump(accentCounts, s.backgroundColor);
     if (s.color) bump(accentCounts, s.color);

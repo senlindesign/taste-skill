@@ -2,13 +2,14 @@
 
 [![Made for Claude Code](https://img.shields.io/badge/Made%20for-Claude%20Code-blueviolet?style=flat-square&logo=anthropic)](https://docs.anthropic.com/en/docs/claude-code)
 [![Works with Gemini CLI](https://img.shields.io/badge/Works%20with-Gemini%20CLI-4285F4?style=flat-square&logo=google)](https://ai.google.dev/gemini-api/docs/gemini-cli)
+[![Works with Codex CLI](https://img.shields.io/badge/Works%20with-Codex%20CLI-000000?style=flat-square&logo=openai)](https://developers.openai.com/codex)
 [![Playwright MCP](https://img.shields.io/badge/Requires-Playwright%20MCP-1db954?style=flat-square)](https://playwright.dev/docs/api/class-playwright)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 [![Demo](https://img.shields.io/badge/Landing%20Page-→-CF9FFC?style=flat-square)](https://www.tastelab.xyz)
 
 Reverse-engineer any website's design taste. Tokens + trade-offs — not just "what", but "why".
 
-> **Quick start:** Clone into `~/.claude/skills/taste`, install Playwright MCP, run `/taste <url>`. [Full install guide below.](#installation)
+> **Quick start.** **Claude Code:** `/plugin marketplace add senlindesign/taste-skill` → `/plugin install taste@taste-skill`. **Codex / Gemini:** clone into the tool's skills dir — or run `./install.sh` to set up all three at once. Then `/taste <url>`. [Full guide below.](#installation)
 
 ---
 
@@ -140,14 +141,24 @@ After analysis, the skill writes an additional file for your build tool:
 
 **Prerequisites:** [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (CLI / Desktop / VS Code)
 
+**Recommended — plugin marketplace** (no clone, auto-updates):
+
 ```bash
-# 1. Clone into your Claude skills directory
+# Run inside Claude Code:
+/plugin marketplace add senlindesign/taste-skill
+/plugin install taste@taste-skill
+```
+
+**Or — clone into your skills directory:**
+
+```bash
 git clone https://github.com/senlindesign/taste-skill ~/.claude/skills/taste
+```
 
-# 2. Install Playwright MCP (one-time)
+Then install Playwright MCP (one-time) and restart Claude Code:
+
+```bash
 claude mcp add playwright -s user -- npx -y @playwright/mcp@latest --isolated
-
-# 3. Restart Claude Code
 ```
 
 Run `/taste <url>` in any project.
@@ -183,6 +194,51 @@ git clone https://github.com/senlindesign/taste-skill ~/.gemini/skills/taste
 ```
 
 Run `/taste <url>` in any project. If your version doesn't support slash commands, use natural language: "run taste on linear.app".
+
+---
+
+### Codex CLI
+
+**Prerequisites:** [Codex CLI](https://developers.openai.com/codex)
+
+```bash
+# 1. Clone into your Codex skills directory
+git clone https://github.com/senlindesign/taste-skill ~/.codex/skills/taste
+```
+
+```toml
+# 2. Add Playwright MCP to ~/.codex/config.toml — the server name must be "playwright"
+[mcp_servers.playwright]
+command = "npx"
+args = ["-y", "@playwright/mcp@latest", "--isolated"]
+```
+
+```bash
+# 3. Restart Codex
+```
+
+Run `/taste <url>` in any project (or natural language: "run taste on linear.app"). The server must be named `playwright` so the skill's `mcp__playwright__*` tool calls resolve — same requirement as the Gemini setup above.
+
+---
+
+### All tools at once
+
+Using more than one CLI? One clone, symlinked into each:
+
+```bash
+git clone https://github.com/senlindesign/taste-skill
+cd taste-skill
+./install.sh        # detects Claude Code / Codex CLI / Gemini CLI, links the skill into each
+```
+
+`install.sh` symlinks this single clone into every tool's skills directory and prints the one-time Playwright MCP setup for each — it never edits your MCP config files. Flags: `--claude` / `--codex` / `--gemini` to force a target, `--uninstall`, `--dry-run`.
+
+---
+
+### Updating
+
+- **Plugin install (Claude):** `/plugin update taste` — Claude Code can also update it automatically.
+- **Clone / `install.sh`:** `git pull` in the clone. With the `install.sh` symlinks, every linked tool picks up the new version at once.
 
 ---
 
